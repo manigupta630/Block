@@ -1,0 +1,28 @@
+
+html {
+  background-color: #151423;
+}
+.dark {
+background-color:rgb(233, 233, 233);
+}
+.section{
+background-color: #151423;
+}
+
+.Mainpage {
+  width: 100%;
+  height: 100vh;
+}
+
+.margin_Horizontally {
+  margin: 0 100px ;
+}
+
+.column-3 {
+    /* box-shadow: 0 0 5px #151423; */
+      margin-top: 50px;
+      /* margin-bottom: 260px; */
+      width: 100%;
+      background-color: #1D1D29;
+    }
+    
