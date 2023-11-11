@@ -27,7 +27,6 @@ import { useApiData } from '../Context/API/ApiProvider';
 function Home() {
   const { themeMode } = useTheme();
   const { coinSupply, blockCount, marketCap, masternodeCount, holdersCount, lastTxsData } = useApiData();
-
   const rowsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(0);
   const pageCount = Math.ceil(lastTxsData.length / rowsPerPage);
@@ -43,6 +42,12 @@ function Home() {
     const utcString = date.toISOString();
     const dateAndTime = utcString.replace('Z', '').replace('T', ' ').slice(0, -4);
     return dateAndTime + ' UTC';
+  }
+  function formatNumber(number) {
+    if (number != null) {
+      return number.toLocaleString('en-US');
+    }
+    return ''; // Return an empty string or any default value if number is null or undefined
   }
 
   useEffect(() => {
@@ -73,44 +78,46 @@ function Home() {
       {/* <h1 className='text-white'>{blockCount}</h1> */}
       <div className="grid-container">
         <div className="column-1 dark:bg-slate-100 dark:text-black">
-          <div className="row-1 shadow-2xl dark:bg-white dark:text-black"><h3>
+          <div className="row-1 shadow-2xl dark:bg-white dark:text-black h-[150px]"><h3>
             Network Hashrate
           </h3>
-            <img src={wave} />
+            <img src={wave} alt="Wave" />
           </div>
           <div className="row-2 dark:bg-slate-100 dark:text-black">
-            <div className='col shadow-2xl dark:bg-white dark:text-black'>
-              <h3>Coin Supply</h3><br />
-              <div className='icons'>{themeMode === 'dark' ? <img src={CoinSupplyL} /> : <img src={CoinSupplyD} />}<p>{coinSupply}</p>  </div>
+            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+              <h3 className="mb-2  font-bold">Coin Supply</h3>
+              <div className='icons mb-4'>
+                {themeMode === 'dark' ? <img src={CoinSupplyL} alt="Coin Supply" /> : <img src={CoinSupplyD} alt="Coin Supply" />}
+                <p>{formatNumber(parseFloat(coinSupply))}</p>
+              </div>
+            </div>
+            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+              <h3 className="mb-2  font-bold">Masternodes</h3>
+                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={MasternodesL} /> : <img src={MasternodesD} />}<p>{masternodeCount}</p> </div>
 
             </div>
-            <div className='col shadow-2xl dark:bg-white dark:text-black'>
-              <h3>Masternodes</h3><br />
-              <div className='icons'>{themeMode === 'dark' ? <img src={MasternodesL} /> : <img src={MasternodesD} />}<p>{masternodeCount}</p> </div>
-
-            </div>
-            <div className='col shadow-2xl dark:bg-white dark:text-black'>
-              <h3>Market Cap</h3><br />
-              <div className='icons'>{themeMode === 'dark' ? <img src={MarketCapL} /> : <img src={MarketCapD} />} <p>{marketCap}</p>  </div>
+            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+              <h3 className="mb-2  font-bold">Market Cap</h3>
+                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={MarketCapL} /> : <img src={MarketCapD} />} <p>{formatNumber(parseFloat(marketCap))}</p>  </div>
             </div>
 
-            <div className='col shadow-2xl dark:bg-white dark:text-black'>
-              <h3>Block Height</h3><br />
-              <div className='icons'>{themeMode === 'dark' ? <img src={BlockHeightL} /> : <img src={BlockHeightD} />} <p>{blockCount} Blocks</p> </div>
+            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+              <h3 className="mb-2  font-bold">Block Height</h3>
+                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={BlockHeightL} /> : <img src={BlockHeightD} />} <p>{blockCount} Blocks</p> </div>
 
             </div>
-            <div className='col shadow-2xl dark:bg-white dark:text-black'>
-              <h3>Network Hashrate</h3><br />
-              <div className='icons'>{themeMode === 'dark' ? <img src={NetworkHashrateL} /> : <img src={NetworkHashrateD} />}<p>597549.899(TH/sec)  </p> </div>
+            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+              <h3 className="mb-2  font-bold">Network Hashrate</h3>
+                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={NetworkHashrateL} /> : <img src={NetworkHashrateD} />}<p>597549.899(TH/s)  </p> </div>
 
             </div>
-            <div className='col shadow-2xl dark:bg-white dark:text-black'>
-              <h3>Holders</h3><br />
-              <div className='icons'>{themeMode === 'dark' ? <img src={CoinHolderL} /> : <img src={CoinHolderD} />} <p>{holdersCount}</p>
+            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+              <h3 className="mb-2  font-bold">Holders</h3>
+                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={CoinHolderL} /> : <img src={CoinHolderD} />} <p>{holdersCount}</p>
               </div>  </div>
 
           </div>
-          <div className="row-3 shadow-2xl dark:bg-white dark:text-black">
+          <div className="row-3 shadow-2xl dark:bg-white dark:text-black  h-[150px]">
             <h3>
               Network Difficulty
             </h3>

@@ -55,11 +55,11 @@ a {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
-.container {
+/* .container { */
   /* max-width: 1120px; */
-  background-color: rgba(21, 20, 35);
+  /* background-color: rgba(21, 20, 35);
   opacity: .8;
-}
+} */
 
 .topheader {
   background-color: #151423;
@@ -75,6 +75,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center; /* Center vertically */
+  background-color: rgba(21, 20, 35);
+  opacity: .8;
 }
 
 /*=============== NAV ===============*/
@@ -102,10 +104,18 @@ a {
   gap: 20px; /* Adjust the gap as needed */
 }
 
-.nav__logo img {
+/* .nav__logo img {
   margin-top: 8px;
   width: 100%;
+  margin-left: 10px;
+} */
+.nav__logo img {
+  margin-top: 8px;
+  width: 150px; /* Adjust the width as needed */
+  height: 72px; /* Adjust the height as needed */
+  margin-left: 10px;
 }
+
 
 .blocxL {
   color: rgba(17, 117, 255, 1);
@@ -452,4 +462,3 @@ a {
 .dark .active {
   color: rgba(17, 117, 255, 1);
 }
-

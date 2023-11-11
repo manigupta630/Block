@@ -5,6 +5,7 @@ import { FaX } from 'react-icons/fa6';
 import { FaSearch } from 'react-icons/fa';
 import logo from '../assets/BLOCXD.svg';
 import logo1 from '../assets/blocxL.svg';
+import blockLogo from '../assets/blockLogo.png';
 import homeedgeTL from '../assets/homeDTR.svg';
 import homeedgeTR from '../assets/homeDBR.svg';
 import homelightTL from '../assets/homelightTL.png';
@@ -27,7 +28,7 @@ function Navbar() {
           <div className="nav__data">
             <div className="logo-price-container">
               <NavLink to="/" className="nav__logo">
-                {themeMode === 'dark' ? <img src={logo1} alt="Logo1" /> : <img src={logo} alt="Logo" />}
+                {themeMode === 'dark' ? <img src={logo1} alt="Logo1" /> : <img src={blockLogo} alt="blockLogo" />}
               </NavLink>
               <div className="blocxL">
                 $0.0505
