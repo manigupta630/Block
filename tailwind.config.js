@@ -13,7 +13,10 @@ export default {
       },
       boxShadow: {
         '2xl': '0px 4px 7px 1px #2c293f',
-      }
+      },
+      backgroundColor: {
+        'custom-gray': 'rgb(233, 233, 233)',
+      },
 
     },
   },

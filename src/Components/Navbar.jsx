@@ -5,19 +5,22 @@ import { FaX } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import logo from "../assets/BLOCXD.svg";
 import logo1 from "../assets/blocxL.svg";
-import blockLogo from "./blockLogo.png";
+import blockLogo from "../assets/blockLogo.png";
 import homeedgeTL from "../assets/homeDTR.svg";
 import homeedgeTR from "../assets/homeDBR.svg";
 import homelightTL from "../assets/homelightTL.png";
 import homelightTR from "../assets/homelightTR.png";
 import useTheme from "../Context/theme";
 import { NavLink } from "react-router-dom"; // Import NavLink
+import { useLocation } from "react-router-dom";
 
 function Navbar() {
   const { themeMode } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const location = useLocation();
+  const [activeNavLink, setActiveNavLink] = useState("");
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -41,107 +44,129 @@ function Navbar() {
     };
   }, []);
 
+
+
+  useEffect(() => {
+
+    const updateActiveNavLink = () => {
+      const paths = [
+        "/masternode",
+        "/networkpeers",
+        "/transaction",
+        "/coinholders",
+        "/claimaddress",
+        "/orphendBlock",
+      ];
+      const activePath = paths.find((path) => location.pathname.startsWith(path));
+      setActiveNavLink(activePath || "");
+    };
+
+
+    updateActiveNavLink();
+
+
+  }, [location.pathname]);
+  console.log(activeNavLink)
+
+
   return (
     <>
-    <div className="container bg-true-gray-900 dark:bg-slate-100 dark:text-black  overflow-x-auto">
-      <header className="fixed h-[100px] top-0 left-0 w-full z-[var(--z-fixed)] flex justify-center items-center  bg-gray-900 bg-opacity-80 ">
-        <nav className="bg-true-gray-900 dark:bg-slate-100 dark:text-black w-full fixed top-0 left-0 z-[var(--z-fixed)] flex justify-between items-center">
-          <div className="flex">
-            <NavLink to="/" className="w-[180px] h-full">
-              {themeMode === "dark" ? (
-                <img src={logo1} className="object-contain " alt="Logo1" />
-              ) : (
-                <img className="" src={blockLogo} alt="blockLogo" />
-              )}
-            </NavLink>
-            <div
-              style={{ color: "#1399fc" }}
-              className="absolute top-[40px] left-[78px]"
-            >
-              $0.0505
-            </div>
-          </div>
-          <div
-            onClick={() => setIsOpen(!isOpen)}
-            className={`text-2xl absolute right-8  cursor-pointer  ${
-              isMobile ? "" : "md:hidden"
-            }`}
-          >
-            <div
-              className="text-white"
-              id="nav-toggle"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? (
-                <FaX className="nav__icon dark:text-white block" />
-              ) : (
-                <FaBars className="nav__icon dark:text-white block" />
-              )}
-            </div>
-          </div>
-          <ul
-            className={`hidden lg:flex w-full justify-between ${
-              isOpen ? "top-20 " : "top-[-490px]"
-            }`}
-          >
-           
-            <li className="">
-              <NavLink
-                to="/masternode"
-                activeClassName="active"
-                className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
-              >
-                Masternodes
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/networkpeers"
-                activeClassName="active"
-                className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
-              >
-                Network Peers
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/transaction"
-                activeClassName="active"
-                className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
-              >
-                Transactions
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/coinholders"
-                activeClassName="active"
-                className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
-              >
-                Coin Holders
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/claimaddress"
-                activeClassName="active"
-                className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
-              >
-                Claim Address
-              </NavLink>
-            </li>
-            <li className="">
-              <NavLink
-                to="/orphendBlock"
-                activeClassName="active"
-                className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
-              >
-                Orphaned Blocks
-              </NavLink>
-            </li>
-          </ul>
+      <div className="container bg-true-gray-900 dark:bg-slate-100 dark:text-black  overflow-x-auto">
+        <header className="fixed h-[100px] top-0 left-0 w-full z-[var(--z-fixed)] flex justify-center items-center  bg-gray-900 bg-opacity-80 ">
+          <nav className="bg-true-gray-900 dark:bg-slate-100 dark:text-black w-full fixed top-0 left-0 z-[var(--z-fixed)] flex justify-between items-center">
+            <div className="flex ml-[1.5rem]">
+              <NavLink to="/" className="w-[180px] h-full">
+                {themeMode === "dark" ? (
+                  // <img src={logo1} className="object-contain " alt="Logo1" />
+                  <img className="" src={blockLogo} alt="blockLogo" />
 
-          {/*
+                ) : (
+                  <img className="" src={blockLogo} alt="blockLogo" />
+                )}
+              </NavLink>
+              <div
+                style={{ color: "#1399fc" }}
+                className="absolute top-[40px] left-[6.5rem]"
+              >
+                $0.0505
+              </div>
+            </div>
+            <div
+              onClick={() => setIsOpen(!isOpen)}
+              className={`text-2xl absolute right-8  cursor-pointer  ${isMobile ? "" : "md:hidden"
+                }`}
+            >
+              <div
+                className={isOpen ? 'dark:text-black' : 'dark:text-white'}
+                id="nav-toggle"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? (
+                  <FaX className={`nav__icon ${themeMode === 'dark' ? 'text-black' : 'text-white'} block`} />
+                ) : (
+                  <FaBars className={`nav__icon ${themeMode === 'dark' ? 'text-black' : 'text-white'} block`} />
+                )}
+              </div>
+
+            </div>
+            <ul
+              className={`hidden lg:flex w-full justify-between ${isOpen ? "top-20 " : "top-[-490px]"
+                }`}
+            >
+
+              <li className="">
+                <NavLink
+                  to="/masternode"
+
+                  className={`block  lg:inline-block  text-sm lg:px-4 whitespace-nowrap  font-semibold transition duration-300 ${activeNavLink === "/masternode" ? "active" : "text-white dark:text-black"
+                    }`}
+                >
+                  Masternodes
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink
+                  to="/networkpeers"
+                  className={`block  lg:inline-block  text-sm  whitespace-nowrap  font-semibold transition duration-300 ${activeNavLink === "/networkpeers" ? "active" : "text-white dark:text-black"
+                    }`}    >
+                  Network Peers
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink
+                  to="/transaction"
+                  className={`block  lg:inline-block  text-sm  whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/transaction" ? "active" : "text-white dark:text-black"
+                    }`} >
+                  Transactions
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink
+                  to="/coinholders"
+                  className={`block  lg:inline-block  text-sm  whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/coinholders" ? "active" : "text-white dark:text-black"
+                    }`}    >
+                  Coin Holders
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink
+                  to="/claimaddress"
+                  className={`block  lg:inline-block  text-sm  whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/claimaddress" ? "active" : "text-white dark:text-black"
+                    }`}  >
+                  Claim Address
+                </NavLink>
+              </li>
+              <li className="">
+                <NavLink
+                  to="/orphendBlock"
+                  className={`block  lg:inline-block  text-sm lg:pr-[5rem] whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/orphendBlock" ? "active" : "text-white dark:text-black"
+                    }`}    >
+                  Orphaned Blocks
+                </NavLink>
+              </li>
+            </ul>
+
+            {/*
       
           <div className='shadow-md w-full top-0 left-0'>
             <div className='lg:flex items-center justify-between bg-true-gray-900 bg-opacity-80 py-4  lg:px-10 '>
@@ -189,9 +214,9 @@ function Navbar() {
             </div>
           </div>
         */}
-        </nav>
-      </header>
-      {/* <header className="header ">
+          </nav>
+        </header>
+        {/* <header className="header ">
         <nav className="nav container items-center  dark:bg-slate-100 dark:text-black">
           <div className="nav__data items-center">
              <div className="logo-price-container items-center">
@@ -238,46 +263,46 @@ function Navbar() {
           </div>
         </nav>
       </header> */}
-      <div className="xl:w-96 mx-auto mt-[15rem]  mb-[2rem] md:mb-[8rem]">
-        <img
-          className="absolute top-0 right-0 w-30 h-30"
-          src={themeMode === "dark" ? homelightTR : homeedgeTR}
-          alt="HomeEdgeTR"
-        />
-        <div className="flex flex-col items-center justify-center  rounded-2xl dark:bg-slate-100 dark:text-black">
-          <div className="relative">
-            <h3 className="dark:text-black mb-2 font-bold text-white text-20">
-              Search
-            </h3>
-            <div className="flex   shadow-2xl items-stretch">
-              <input
-                type="text"
-                // className="relative m-0 flex-auto shadow-2xl rounded border text-black dark:bg-slate-100 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] dark:text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
-                className="px-3  relative border-none outline-none  w-full md:w-[34rem] bg-[#1d1d29] p-4 rounded-md text-white dark:bg-white dark:text-black"
-                aria-label="Search"
-                aria-describedby="button-addon2"
-              />
-              <span
-                className=" flex items-center  absolute dark:text-black right-0 whitespace-nowrap rounded px-3 py-[1.2rem] text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
-                id="basic-addon2"
-              >
-                {themeMode === "dark" ? (
-                  <FaSearch color={"black"} />
-                ) : (
-                  <FaSearch color={"white"} />
-                )}
-              </span>
-            </div>
-          </div>
+        <div className="xl:w-96 mx-auto mt-[15rem]  mb-[2rem] md:mb-[8rem]">
           <img
-            className="md:top-[10rem] top-[0rem] absolute bottom-0 left-0"
-            src={themeMode === "dark" ? homelightTL : homeedgeTL}
-            alt="HomeEdgeTL"
+            className="absolute top-0 right-0 w-30 h-30"
+            src={themeMode === "dark" ? homelightTR : homeedgeTR}
+            alt="HomeEdgeTR"
           />
+          <div className="flex flex-col items-center justify-center  rounded-2xl dark:bg-slate-100 dark:text-black">
+            <div className="relative">
+              <h3 className="dark:text-black mb-2 font-bold text-white text-20">
+                Search
+              </h3>
+              <div className="flex  rounded-xl shadow-2xl items-stretch">
+                <input
+                  type="text"
+                  // className="relative m-0 flex-auto shadow-2xl rounded border text-black dark:bg-slate-100 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] dark:text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                  className="px-3  relative border-none outline-none  w-full md:w-[34rem] bg-[#1d1d29] p-[10px] rounded-xl text-white dark:bg-white dark:text-black"
+                  aria-label="Search"
+                  aria-describedby="button-addon2"
+                />
+                <span
+                  className=" flex items-center  absolute dark:text-black right-0 whitespace-nowrap rounded px-3 py-[1rem] text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
+                  id="basic-addon2"
+                >
+                  {themeMode === "dark" ? (
+                    <FaSearch color={"black"} />
+                  ) : (
+                    <FaSearch color={"white"} />
+                  )}
+                </span>
+              </div>
+            </div>
+            <img
+              className="md:top-[10rem] top-[0rem] absolute bottom-0 left-0"
+              src={themeMode === "dark" ? homelightTL : homeedgeTL}
+              alt="HomeEdgeTL"
+            />
+          </div>
         </div>
-      </div>
 
-      {/* <div className='navBottom '>
+        {/* <div className='navBottom '>
         <img className='homeedgeTR' src={themeMode === 'dark' ? homelightTR : homeedgeTR} alt="HomeEdgeTR" />
         <div className="search-container dark:bg-slate-100 dark:text-black">
           <div className="flex flex-col items-center justify-center w-full mt-[14rem] rounded-2xl dark:bg-slate-100 dark:text-black">
@@ -291,13 +316,13 @@ function Navbar() {
         </div>
 
       </div> */}
-    </div>
+      </div>
 
-{
-  isOpen &&
-<MobileNav showMenu={showMenu}/>
+      {
+        isOpen &&
+        <MobileNav showMenu={showMenu} themeMode={themeMode} activeNavLink={activeNavLink} />
 
-}
+      }
 
     </>
 
@@ -305,19 +330,20 @@ function Navbar() {
   );
 }
 
-const MobileNav = () => {
+const MobileNav = ({ themeMode, showMenu, activeNavLink }) => {
   return (
     <>
-     <ul
-            className={`fixed flex-col w-full  duration-300 ease-in-out transition-all z-[100]  lg:hidden top-[85px] p-[25px]  bg-gray-900 bg-opacity-90 h-[400px] justify-between item-center
- }`}
-          >
-           
+      <ul
+        className={`fixed flex-col w-full duration-300 ease-in-out transition-all z-[100] lg:hidden top-[85px] p-[25px] justify-between items-center
+          ${themeMode === 'dark' ? 'custom-gray bg-slate-100' : 'bg-gray-900 bg-opacity-90'}`}
+      >
+
         <li className="link">
           <NavLink
             to="/masternode"
-            activeClassName="active"
-            className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
+
+            className={`block  lg:inline-block  text-sm lg:px-4 whitespace-nowrap  font-semibold transition duration-300 ${activeNavLink === "/masternode" ? "active" : "text-white dark:text-black"
+              }`}
           >
             Masternodes
           </NavLink>
@@ -326,8 +352,9 @@ const MobileNav = () => {
 
           <NavLink
             to="/networkpeers"
-            activeClassName="active"
-            className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
+
+            className={`block  lg:inline-block text-sm lg:px-4 whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/networkpeers" ? "active" : "text-white dark:text-black"
+              }`}
           >
             Network Peers
           </NavLink>
@@ -336,8 +363,9 @@ const MobileNav = () => {
 
           <NavLink
             to="/transaction"
-            activeClassName="active"
-            className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
+
+            className={`block  lg:inline-block  text-sm lg:px-4 whitespace-nowrap  font-semibold transition duration-300 ${activeNavLink === "/transaction" ? "active" : "text-white dark:text-black"
+              }`}
           >
             Transactions
           </NavLink>
@@ -346,8 +374,9 @@ const MobileNav = () => {
 
           <NavLink
             to="/coinholders"
-            activeClassName="active"
-            className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
+
+            className={`block  lg:inline-block text-sm lg:px-4 whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/coinholders" ? "active" : "text-white dark:text-black"
+              }`}
           >
             Coin Holders
           </NavLink>
@@ -356,8 +385,9 @@ const MobileNav = () => {
 
           <NavLink
             to="/claimaddress"
-            activeClassName="active"
-            className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
+
+            className={`block  lg:inline-block text-sm lg:px-4 whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/claimaddress" ? "active" : "text-white dark:text-black"
+              }`}
           >
             Claim Address
           </NavLink>
@@ -366,8 +396,9 @@ const MobileNav = () => {
 
           <NavLink
             to="/orphendBlock"
-            activeClassName="active"
-            className="block  lg:inline-block dark:text-black text-sm lg:px-4 whitespace-nowrap text-white font-semibold transition duration-300"
+
+            className={`block  lg:inline-block  text-sm lg:px-4 whitespace-nowrap font-semibold transition duration-300 ${activeNavLink === "/orphendBlock" ? "active" : "text-white dark:text-black"
+              }`}
           >
             Orphaned Blocks
           </NavLink>

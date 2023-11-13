@@ -58,32 +58,32 @@ function NetworkPeers() {
        <div className="mx-2 md:mx-0 lg:mx-0">
       <div className='tittle dark:text-black max-md:text-3xl'>Network Peers</div>
       <div className="text-white shadow-2xl bg-[#1d1d29]  mt-[2rem]  flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto">
-        <div className="table-container">
-          <table className="custom-table">
+      <div className="table-container overflow-x-auto">
+        <table className="custom-table w-full">
             <thead>
               <tr>
-                <th className='rounded-lg dark-bg-white dark-text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Address</th>
-                <th className='dark-bg-white dark-text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Protocol</th>
-                <th className='dark-bg-white dark-text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Sub-Version</th>
-                <th className='rounded-lg dark-bg-white dark-text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Country</th>
+                <th className='rounded-lg dark:bg-white dark:text-black md:text-2xl text-base' style={{ minWidth: '150px' }}>Address</th>
+                <th className='dark:bg-white dark:text-black md:text-2xl text-base' style={{ minWidth: '150px' }}>Protocol</th>
+                <th className='dark:bg-white dark:text-black md:text-2xl text-base' style={{ minWidth: '150px' }}>Sub-Version</th>
+                <th className='rounded-lg dark:bg-white dark:text-black md:text-2xl text-base' style={{ minWidth: '150px' }}>Country</th>
               </tr>
             </thead>
             <tbody>
               {displayedData.map((item, index) => (
                 <tr key={index}>
-                  <td className='rounded-lg dark-bg-white dark-text-black'>{item.address || 'N/A'}</td>
-                  <td className='dark-bg-white dark-text-black'>{item.protocol || 'N/A'}</td>
-                  <td className='dark-bg-white dark-text-black'>{item.version || 'N/A'}</td>
-                  <td className='dark-bg-white dark-text-black '>
-                  <div className='flag'>
-                      <p>{item.country || 'N/A'}</p>
-                    {item.country_code ? (
-                      <CountryFlag countryCode={item.country_code} svg />
-                    ) : (
-                      'N/A'
-                    )}
-                    </div>
-                  </td>
+                  <td className=' dark:bg-white dark:text-black'>{item.address || 'N/A'}</td>
+                  <td className='dark:bg-white dark:text-black'>{item.protocol || 'N/A'}</td>
+                  <td className='dark:bg-white dark:text-black'>{item.version || 'N/A'}</td>
+                  <td className='dark:bg-white dark:text-black w-64'>
+  <div className='flex justify-between items-center'>
+    <span className=''>{item.country || 'N/A'}</span>
+    {item.country_code ? (
+      <CountryFlag countryCode={item.country_code} svg />
+    ) : (
+      'N/A'
+    )}
+  </div>
+</td>
                 </tr>
               ))}
             </tbody>
@@ -94,7 +94,7 @@ function NetworkPeers() {
         <ReactPaginate
           previousLabel={'< '}
           nextLabel={' >'}
-          containerClassName={"pagination my-pagination dark-bg-white dark-text-black"}
+          containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
           pageCount={pageCount}
           pageRangeDisplayed={5}
           marginPagesDisplayed={2}
@@ -102,9 +102,10 @@ function NetworkPeers() {
           activeClassName={'active'}
         />
       </div>
-      <div className='map rounded-lg shadow-2xl dark-bg-white dark-text-black'>
-        <MyMap />
-      </div>
+      <div className='map rounded-lg bg-[#1d1d29] mt-[2rem] shadow-2xl dark:bg-white dark:text-black'>
+
+<MyMap />
+</div>
       <div className='bottomImg'>
         <img className='homeedgeBR' src={themeMode === 'dark' ? homelightBR : homeedgeBR} alt="Home Edge" />
         <img className='homeedgeBL' src={themeMode === 'dark' ? homelightBL : homeedgeBL} alt="Home Edge" />

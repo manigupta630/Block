@@ -27,7 +27,7 @@ import { NavLink } from 'react-router-dom';
 import { useApiData } from '../Context/API/ApiProvider';
 function Home() {
   const { themeMode } = useTheme();
-  const { coinSupply, blockCount, marketCap, masternodeCount, holdersCount, lastTxsData } = useApiData();
+  const { coinSupply, blockCount, marketCap, masternodeCount, holdersCount, lastTxsData ,networkHashRate} = useApiData();
   const rowsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(0);
   const pageCount = Math.ceil(lastTxsData.length / rowsPerPage);
@@ -51,7 +51,13 @@ function Home() {
     return ''; // Return an empty string or any default value if number is null or undefined
   }
 
-
+  function formatToDecimalNumber(number) {
+    // Convert the number to a fixed format with one decimal place
+    if (number != null) {
+      return (number / 1000000000000).toFixed(1);
+    }
+    return '';
+  }
   return (
     <>
       {/* <Navbar /> */}
@@ -59,7 +65,7 @@ function Home() {
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="text-white flex flex-col justify-between gap-10 border-radius-10 dark:bg-slate-100 dark:text-black ">
-            <div className="flex flex-col justify-between bg-1D1D29 border border-solid border-[#2c293f] rounded-tl-2xl rounded-tr-2xl  shadow-2xl dark:bg-white dark:text-black h-[-1rem] lg:mb-[-2rem]">
+            <div className="flex flex-col justify-between bg-[#1d1d29] border border-solid border-[#2c293f] rounded-tl-2xl rounded-tr-2xl  shadow-2xl dark:bg-white dark:text-black h-[-1rem] lg:mb-[-2rem]">
               <h3 className="font-bold  whitespace-nowrap" style={{
                 paddingLeft: '20px',
                 paddingTop: '12px',
@@ -93,7 +99,7 @@ function Home() {
               </div>
               <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
                 <h3 className="mb-2 whitespace-nowrap font-bold text-sm">Network Hashrate</h3>
-                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={NetworkHashrateL} /> : <img src={NetworkHashrateD} />}<p>597549.899(TH/s)  </p> </div>
+                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={NetworkHashrateL} /> : <img src={NetworkHashrateD} />}<p>{formatToDecimalNumber(networkHashRate)}(TH/s)  </p> </div>
 
               </div>
               <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
@@ -102,7 +108,7 @@ function Home() {
                 </div>  </div>
 
             </div>
-            <div className="flex flex-col justify-between bg-1D1D29 border border-solid border-[#2c293f] rounded-tl-2xl rounded-tr-2xl  shadow-2xl dark:bg-white dark:text-black  h-[-1rem] ">
+            <div className="flex flex-col justify-between bg-[#1d1d29] border border-solid border-[#2c293f] rounded-tl-2xl rounded-tr-2xl  shadow-2xl dark:bg-white dark:text-black  h-[-1rem] ">
               <h3 className="font-bold  whitespace-nowrap" style={{
                 paddingLeft: '20px',
                 paddingTop: '12px',
@@ -114,11 +120,11 @@ function Home() {
           </div>
           <div>
 
-            <div className='text-white shadow-2xl  flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto'>
+            <div className='text-white shadow-2xl bg-[#1d1d29] flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto'>
               <div className="table-container">
                 <table className="custom-table">
                   <thead>
-                    <tr>
+                    <tr >
                       <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Block</th>
                       <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Recipients</th>
                       <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Amount (BLOCX)</th>
@@ -128,10 +134,12 @@ function Home() {
                   <tbody>
                     {displayedData.map((item, index) => (
                       <tr key={index}>
-                        <td className=' rounded-lg dark:bg-white dark:text-black '>{item.blockindex}</td>
+                    <td className=' dark:bg-white dark:text-black address'> <NavLink to={`/tx/${item.txid}`}>{item.blockindex}</NavLink></td>
+
+                        {/* <td className='  dark:bg-white dark:text-black '>{item.blockindex}</td> */}
                         <td className={`dark:bg-white dark:text-black ${themeMode}`}>{item.recipients}</td>
                         <td className={`dark:bg-white dark:text-black ${themeMode}`}>{item.amount}</td>
-                        <td className={`rounded-lg dark-bg-white dark-text-black ${themeMode}`}>
+                        <td className={` dark:bg-white dark:text-black`}>
                           {convertTimestampToUTC(item.timestamp)}
                         </td>
                       </tr>
@@ -140,7 +148,7 @@ function Home() {
                 </table>
               </div>
             </div>
-            <div className='pagination rounded-lg   shadow-2xl'>
+            <div className='pagination rounded-lg  shadow-2xl'>
               <ReactPaginate
                 previousLabel={'< '}
                 nextLabel={' >'}
@@ -155,7 +163,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className='map rounded-lg  mt-[2rem] shadow-2xl dark:bg-white dark:text-black'>
+        <div className='map rounded-lg bg-[#1d1d29] mt-[2rem] shadow-2xl dark:bg-white dark:text-black'>
 
           <MyMap />
         </div>
@@ -165,17 +173,17 @@ function Home() {
             <table className="custom-table">
               <thead>
                 <tr>
-                  <th className='rounded-lg dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Tx Hash</th>
+                  <th className=' dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Tx Hash</th>
                   <th className='dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Amount (BLOCX)</th>
-                  <th className=' rounded-lg dark:bg-white dark:text-black text-2xl text-sm-xl md:text-base' style={{ minWidth: '150px' }}>TimeStamp</th>
+                  <th className=' dark:bg-white dark:text-black text-2xl text-sm-xl md:text-base' style={{ minWidth: '150px' }}>TimeStamp</th>
                 </tr>
               </thead>
               <tbody>
                 {displayedData.map((item, index) => (
                   <tr key={index}>
-                    <td className='rounded-lg dark:bg-white dark:text-black address'> <NavLink to={`/tx/${item.txid}`}>{item.txid}</NavLink></td>
+                    <td className=' dark:bg-white dark:text-black address'> <NavLink to={`/tx/${item.txid}`}>{item.txid}</NavLink></td>
                     <td className='dark:bg-white dark:text-black'>{item.amount}</td>
-                    <td className=' rounded-lg dark:bg-white dark:text-black '>{convertTimestampToUTC(item.timestamp)}</td>
+                    <td className=' dark:bg-white dark:text-black'>{convertTimestampToUTC(item.timestamp)}</td>
                   </tr>
                 ))}
               </tbody>

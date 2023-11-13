@@ -71,10 +71,10 @@ function CoinHolders() {
       <tbody>
         {displayedData.map((item, index) => (
           <tr key={index}>
-            <td className='rounded-lg dark:bg-white  dark:text-black idAddress'>{index+1}</td>
+            <td className=' dark:bg-white  dark:text-black idAddress'>{index+1}</td>
             <td className='dark:bg-white text-blue address'>{item.a_id}</td>
             <td className='dark:bg-white dark:text-black'>{item.balance}</td>
-            <td className='rounded-lg dark:bg-white dark:text-black'>N/A
+            <td className=' dark:bg-white dark:text-black'>N/A
             
             </td>
           </tr>

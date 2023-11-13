@@ -62,10 +62,10 @@ function OrphendBlock() {
               <tbody>
                 {displayedData.map((item, index) => (
                   <tr key={index}>
-                    <td className='rounded-lg dark:bg-white dark:text-black address'>000000000000006864a8caebba75634a2e77df4cb58afe45630bbb5ff922c9ca</td>
+                    <td className='dark:bg-white dark:text-black address'>000000000000006864a8caebba75634a2e77df4cb58afe45630bbb5ff922c9ca</td>
                     <td className='dark:bg-white dark:text-black'>42412</td>
                     <td className='dark:bg-white dark:text-black'>35207</td>
-                    <td className='rounded-lg dark:bg-white dark:text-black'>33015
+                    <td className='dark:bg-white dark:text-black'>33015
 
                     </td>
                   </tr>

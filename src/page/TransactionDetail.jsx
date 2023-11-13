@@ -90,26 +90,26 @@ const [transactionVout, setTransactionVout] = useState([]);
       </div>
 
       <div className='tittle dark:text-black max-md:text-3xl'>Transactions</div>
-      <div className={`column-3 rounded-lg shadow-2xl dark:bg-white dark:text-black ${isTableScrollable ? 'scrollable' : ''}`}>
+      <div className='column-3 rounded-lg shadow-2xl dark:bg-white dark:text-black overflow-x-auto'>
                 <div className="table-container">
                     <table className="custom-table">
           <thead>
             <tr>
-              <th className='rounded-lg dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Address</th>
+              <th className='dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Address</th>
               <th className='dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Amount (BLOCX)</th>
             </tr>
           </thead>
           <tbody>
       {transactionVin.map((transaction, index) => (
         <tr key={index}>
-          <td className="rounded-lg dark:bg-white dark:text-black address">{transaction.addresses}</td>
-          <td className="dark:bg-white dark:text-black" style={{ backgroundColor: amountBackgroundColor(transaction.amount) }}>{transaction.amount}</td>
+          <td className=" dark:bg-white dark:text-black address">{transaction.addresses}</td>
+          <td className="dark:bg-white dark:text-black" >{transaction.amount}</td>
         </tr>
       ))}
       {transactionVout.map((transaction, index) => (
         <tr key={index}>
-          <td className="rounded-lg dark:bg-white dark:text-black address">{transaction.addresses}</td>
-          <td className="dark:bg-white dark:text-black" style={{ backgroundColor: amountBackgroundColor(transaction.amount) }}>{transaction.amount}</td>
+          <td className=" dark:bg-white dark:text-black address">{transaction.addresses}</td>
+          <td className="dark:bg-white dark:text-black" >{transaction.amount}</td>
         </tr>
       ))}
     </tbody>

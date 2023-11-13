@@ -19,7 +19,7 @@ function AccordionItem({ title, content, isOpen, toggleAccordion }) {
         {title}
       </div>
       {isOpen && (
-        <div className="p-10 text-white text-2xl dark:text-black">
+        <div className="p-10 text-white text-sm md:text-2xl dark:text-black">
           {contentParagraphs}
         </div>
       )}
@@ -52,7 +52,7 @@ function Accordion() {
   };
 
   return (
-    <div className="mt-40 w-full">
+    <div className="mt-20   w-full">
       {accordionData.map((item, index) => (
         <AccordionItem
           key={index}

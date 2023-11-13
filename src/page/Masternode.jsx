@@ -79,7 +79,7 @@ function Masternode() {
             <tbody>
               {displayedData.map((item, index) => (
                 <tr key={index}>
-                  <td className="rounded-lg dark:bg-white dark:text-black">{item.ip_address}</td>
+                  <td className=" dark:bg-white dark:text-black">{item.ip_address}</td>
                   <td className="dark:bg-white dark:text-black">
                     <p className="address">
                       <NavLink to={`/address/${item.addr}`}>{item.addr}</NavLink>
@@ -87,7 +87,7 @@ function Masternode() {
                   </td>
                   <td className="dark:bg-white dark:text-black">{item.lastpaid}</td>
                   <td className="dark:bg-white dark:text-black">{item.last_paid_block}</td>
-                  <td className="rounded-lg dark:bg-white dark:text-black">
+                  <td className=" dark:bg-white dark:text-black">
                     <button className="custom-button">{item.status}</button>
                   </td>
                 </tr>
