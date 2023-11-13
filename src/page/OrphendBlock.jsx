@@ -4,7 +4,8 @@ import staticData from '../Context/Staticdata'
 import homeedgeBR from '../assets/homeDTL.svg'
 import homeedgeBL from '../assets/homeDBL.svg'
 import homelightBR from '../assets/homelightBR.png'
-import homelightBL from '../assets/homelightBl.png'
+import homelightBL from '../assets/homelightBL.png'
+
 import useTheme from '../Context/theme'
 import { useApiData } from '../Context/API/ApiProvider';
 

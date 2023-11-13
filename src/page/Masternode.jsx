@@ -6,7 +6,8 @@ import useTheme from '../Context/theme'
 import homeedgeBR from '../assets/homeDTL.svg'
 import homeedgeBL from '../assets/homeDBL.svg'
 import homelightBR from '../assets/homelightBR.png'
-import homelightBL from '../assets/homelightBl.png'
+import homelightBL from '../assets/homelightBL.png'
+
 import { NavLink } from 'react-router-dom';
 import { useApiData } from '../Context/API/ApiProvider';
 
