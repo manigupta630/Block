@@ -64,8 +64,9 @@ const [transactionVout, setTransactionVout] = useState([]);
     
   return (
     <>
+     <div className="mx-2 md:mx-0 lg:mx-0">
       <div className='tittle dark:text-black max-md:text-3xl'>Block Transaction Details</div>
-      <div className={`column-3 rounded-lg shadow-2xl dark:bg-white dark:text-black ${isTableScrollable ? 'scrollable' : ''}`}>
+      <div className="text-white shadow-2xl bg-[#1d1d29]  mt-[2rem]  flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto">
         <div className="table-container">
           <table className="custom-table">
             <tbody>
@@ -119,6 +120,7 @@ const [transactionVout, setTransactionVout] = useState([]);
       <div className='bottomImg'>
         <img className='homeedgeBR' src={themeMode === 'dark' ? homelightBR : homeedgeBR} />
         <img className='homeedgeBL' src={themeMode === 'dark' ? homelightBL : homeedgeBL} />
+      </div>
       </div>
     </>
 

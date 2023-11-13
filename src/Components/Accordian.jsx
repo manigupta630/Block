@@ -11,15 +11,15 @@ function AccordionItem({ title, content, isOpen, toggleAccordion }) {
   ));
   const{themeMode}=useTheme()
   return (
-    <div className={`accordion-item ${isOpen ? 'open' : ''}`}>
-      <div className="accordion-title dark:text-black max-md:text-2xl max-sm:text-base" onClick={toggleAccordion}>
+    <div className={`w-full mx-auto my-10 rounded-md overflow-hidden ${isOpen ? 'open' : ''}`}>
+      <div className="flex items-center px-10 cursor-pointer text-white text-3xl dark:text-black max-md:text-2xl max-sm:text-base" onClick={toggleAccordion}>
         <span className="accordion-icon mr-1">
           {isOpen ? <img src={themeMode === 'dark'?dropUPL :dropUPD} className='dropIcon'/> : <img src={themeMode === 'dark'? dropdownL:dropdownD} className='dropIcon'/>}
         </span>
         {title}
       </div>
       {isOpen && (
-        <div className="accordion-content dark:text-black">
+        <div className="p-10 text-white text-2xl dark:text-black">
           {contentParagraphs}
         </div>
       )}
@@ -52,7 +52,7 @@ function Accordion() {
   };
 
   return (
-    <div className="accordion">
+    <div className="mt-40 w-full">
       {accordionData.map((item, index) => (
         <AccordionItem
           key={index}

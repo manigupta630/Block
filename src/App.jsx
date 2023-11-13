@@ -45,7 +45,7 @@ useEffect(() => {
     <BrowserRouter>
     <Navbar/>
     <ApiProvider>
-    <Container fluid className="margin_Horizontally dark:bg-slate-100 dark:text-black">
+    <Container fluid className="lg:mx-[2rem] mx-2 dark:bg-slate-100 dark:text-black overflow-x-hidden">
       
       <Routes>
        <Route path='/' element={<Home/>}/>

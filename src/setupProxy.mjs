@@ -2,7 +2,7 @@
 import corsAnywhere from 'cors-anywhere';
 
 const host = process.env.HOST || '0.0.0.0';
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 1000;
 
 const proxy = corsAnywhere.createServer({
   originWhitelist: [], // Allow all origins

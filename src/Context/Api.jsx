@@ -6,7 +6,7 @@ function Api() {
 
   useEffect(() => {
     const apiUrl = 'https://explorer.blocx.space/api/getblockcount';
-    const corsProxyUrl = 'http://localhost:8080/'; // Use your own proxy URL
+    const corsProxyUrl = 'http://localhost:1000/'; // Use your own proxy URL
 
 
     fetch(corsProxyUrl + apiUrl, {

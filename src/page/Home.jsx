@@ -50,169 +50,156 @@ function Home() {
     return ''; // Return an empty string or any default value if number is null or undefined
   }
 
-  useEffect(() => {
-    // Add a listener to handle screen size changes
-    const handleResize = () => {
-      // Check if the screen size is small and set a flag accordingly
-      const isSmallScreen = window.innerWidth <= 1024; // Adjust the width as needed
-      setTableScrollable(isSmallScreen);
-    };
-
-    // Attach the listener
-    window.addEventListener('resize', handleResize);
-
-    // Initial check on component mount
-    handleResize();
-
-    // Cleanup the listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const [isTableScrollable, setTableScrollable] = useState(false);
 
   return (
     <>
       {/* <Navbar /> */}
       {/* <h1 className='text-white'>{blockCount}</h1> */}
-      <div className="grid-container">
-        <div className="column-1 dark:bg-slate-100 dark:text-black">
-          <div className="row-1 shadow-2xl dark:bg-white dark:text-black h-[150px]"><h3>
-            Network Hashrate
-          </h3>
-            <img src={wave} alt="Wave" />
+      <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="text-white flex flex-col justify-between gap-10 border-radius-10 dark:bg-slate-100 dark:text-black ">
+            <div className="flex flex-col justify-between bg-1D1D29 border border-solid border-[#2c293f] rounded-tl-2xl rounded-tr-2xl  shadow-2xl dark:bg-white dark:text-black h-[-1rem] lg:mb-[-2rem]">
+              <h3 className="font-bold  whitespace-nowrap" style={{
+                paddingLeft: '20px',
+                paddingTop: '12px',
+              }}>
+                Network Hashrate
+              </h3>
+              <img src={wave} alt="Wave" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4  mt-[-10px] mb-[-10px] dark:bg-slate-100 dark:text-black">
+              <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+                <h3 className="mb-2  font-bold">Coin Supply</h3>
+                <div className='icons mb-4'>
+                  {themeMode === 'dark' ? <img src={CoinSupplyL} alt="Coin Supply" /> : <img src={CoinSupplyD} alt="Coin Supply" />}
+                  <p>{formatNumber(parseFloat(coinSupply))}</p>
+                </div>
+              </div>
+              <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+                <h3 className="mb-2  whitespace-nowrap font-bold text-sm">Masternodes</h3>
+                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={MasternodesL} /> : <img src={MasternodesD} />}<p>{masternodeCount}</p> </div>
+
+              </div>
+              <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+                <h3 className="mb-2  whitespace-nowrap font-bold text-sm">Market Cap</h3>
+                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={MarketCapL} /> : <img src={MarketCapD} />} <p>{formatNumber(parseFloat(marketCap))}</p>  </div>
+              </div>
+
+              <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+                <h3 className="mb-2  whitespace-nowrap font-bold text-sm">Block Height</h3>
+                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={BlockHeightL} /> : <img src={BlockHeightD} />} <p>{blockCount} Blocks</p> </div>
+
+              </div>
+              <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+                <h3 className="mb-2 whitespace-nowrap font-bold text-sm">Network Hashrate</h3>
+                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={NetworkHashrateL} /> : <img src={NetworkHashrateD} />}<p>597549.899(TH/s)  </p> </div>
+
+              </div>
+              <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
+                <h3 className="mb-2  whitespace-nowrap font-bold text-sm">Holders</h3>
+                <div className='icons mb-4 text-sm'>{themeMode === 'dark' ? <img src={CoinHolderL} /> : <img src={CoinHolderD} />} <p>{holdersCount}</p>
+                </div>  </div>
+
+            </div>
+            <div className="flex flex-col justify-between bg-1D1D29 border border-solid border-[#2c293f] rounded-tl-2xl rounded-tr-2xl  shadow-2xl dark:bg-white dark:text-black  h-[-1rem] ">
+              <h3 className="font-bold  whitespace-nowrap" style={{
+                paddingLeft: '20px',
+                paddingTop: '12px',
+              }}>
+                Network Difficulty
+              </h3>
+              <img src={wave1} />
+            </div>
           </div>
-          <div className="row-2 dark:bg-slate-100 dark:text-black">
-            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
-              <h3 className="mb-2  font-bold">Coin Supply</h3>
-              <div className='icons mb-4'>
-                {themeMode === 'dark' ? <img src={CoinSupplyL} alt="Coin Supply" /> : <img src={CoinSupplyD} alt="Coin Supply" />}
-                <p>{formatNumber(parseFloat(coinSupply))}</p>
+          <div>
+
+            <div className='text-white shadow-2xl  flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto'>
+              <div className="table-container">
+                <table className="custom-table">
+                  <thead>
+                    <tr>
+                      <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Block</th>
+                      <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Recipients</th>
+                      <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Amount (BLOCX)</th>
+                      <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>TimeStamp</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {displayedData.map((item, index) => (
+                      <tr key={index}>
+                        <td className=' rounded-lg dark:bg-white dark:text-black '>{item.blockindex}</td>
+                        <td className={`dark:bg-white dark:text-black ${themeMode}`}>{item.recipients}</td>
+                        <td className={`dark:bg-white dark:text-black ${themeMode}`}>{item.amount}</td>
+                        <td className={`rounded-lg dark-bg-white dark-text-black ${themeMode}`}>
+                          {convertTimestampToUTC(item.timestamp)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
-              <h3 className="mb-2  font-bold">Masternodes</h3>
-                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={MasternodesL} /> : <img src={MasternodesD} />}<p>{masternodeCount}</p> </div>
-
+            <div className='pagination rounded-lg   shadow-2xl'>
+              <ReactPaginate
+                previousLabel={'< '}
+                nextLabel={' >'}
+                containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
+                pageCount={pageCount}
+                pageRangeDisplayed={8}
+                marginPagesDisplayed={2}
+                onPageChange={handlePageClick}
+                // containerClassName={'pagination'}
+                activeClassName={'active'}
+              />
             </div>
-            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
-              <h3 className="mb-2  font-bold">Market Cap</h3>
-                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={MarketCapL} /> : <img src={MarketCapD} />} <p>{formatNumber(parseFloat(marketCap))}</p>  </div>
-            </div>
-
-            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
-              <h3 className="mb-2  font-bold">Block Height</h3>
-                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={BlockHeightL} /> : <img src={BlockHeightD} />} <p>{blockCount} Blocks</p> </div>
-
-            </div>
-            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
-              <h3 className="mb-2  font-bold">Network Hashrate</h3>
-                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={NetworkHashrateL} /> : <img src={NetworkHashrateD} />}<p>597549.899(TH/s)  </p> </div>
-
-            </div>
-            <div className='flex flex-col box justify-center shadow-2xl dark:bg-white dark:text-black  items-center rounded-10'>
-              <h3 className="mb-2  font-bold">Holders</h3>
-                 <div className='icons mb-4'>{themeMode === 'dark' ? <img src={CoinHolderL} /> : <img src={CoinHolderD} />} <p>{holdersCount}</p>
-              </div>  </div>
-
-          </div>
-          <div className="row-3 shadow-2xl dark:bg-white dark:text-black  h-[150px]">
-            <h3>
-              Network Difficulty
-            </h3>
-            <img src={wave1} />
           </div>
         </div>
-        <div>
+        <div className='map rounded-lg  mt-[2rem] shadow-2xl dark:bg-white dark:text-black'>
 
-          <div className={`column-2 rounded-lg shadow-2xl dark:bg-white dark:text-black ${isTableScrollable ? 'scrollable' : ''}`}>
-            <div className="table-container">
-              <table className="custom-table">
-                <thead>
-                  <tr>
-                    <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Block</th>
-                    <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Recipients</th>
-                    <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>Amount (BLOCX)</th>
-                    <th className={` rounded-lg dark:bg-white dark:text-black ${themeMode}`}>TimeStamp</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {displayedData.map((item, index) => (
-                    <tr key={index}>
-                      <td className=' rounded-lg dark:bg-white dark:text-black '>{item.blockindex}</td>
-                      <td className={`dark:bg-white dark:text-black ${themeMode}`}>{item.recipients}</td>
-                      <td className={`dark:bg-white dark:text-black ${themeMode}`}>{item.amount}</td>
-                      <td className="rounded-lg dark-bg-white dark-text-black">
-                        {convertTimestampToUTC(item.timestamp)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className='pagination rounded-lg shadow-2xl'>
-            <ReactPaginate
-              previousLabel={'< '}
-              nextLabel={' >'}
-              containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
-              pageCount={pageCount}
-              pageRangeDisplayed={8}
-              marginPagesDisplayed={2}
-              onPageChange={handlePageClick}
-              // containerClassName={'pagination'}
-              activeClassName={'active'}
-            />
-          </div>
+          <MyMap />
         </div>
-      </div>
-      <div className='map rounded-lg shadow-2xl dark:bg-white dark:text-black'>
 
-        <MyMap />
-      </div>
-
-
-      <div className={`column-3 rounded-lg shadow-2xl dark:bg-white dark:text-black ${isTableScrollable ? 'scrollable' : ''}`}>
-        <div className="table-container">
-          <table className="custom-table">
-            <thead>
-              <tr>
-                <th className='rounded-lg dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Tx Hash</th>
-                <th className='dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Amount (BLOCX)</th>
-                <th className=' rounded-lg dark:bg-white dark:text-black text-2xl text-sm-xl md:text-base' style={{ minWidth: '150px' }}>TimeStamp</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayedData.map((item, index) => (
-                <tr key={index}>
-                  <td className='rounded-lg dark:bg-white dark:text-black address'> <NavLink to={`/tx/${item.txid}`}>{item.txid}</NavLink></td>
-                  <td className='dark:bg-white dark:text-black'>{item.amount}</td>
-                  <td className=' rounded-lg dark:bg-white dark:text-black '>{convertTimestampToUTC(item.timestamp)}</td>
+        <div className='text-white shadow-2xl bg-[#1d1d29]  mt-[2rem]  flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto'>
+          <div className="table-container">
+            <table className="custom-table">
+              <thead>
+                <tr>
+                  <th className='rounded-lg dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Tx Hash</th>
+                  <th className='dark:bg-white dark:text-black text-2xl md:text-base' style={{ minWidth: '150px' }}>Amount (BLOCX)</th>
+                  <th className=' rounded-lg dark:bg-white dark:text-black text-2xl text-sm-xl md:text-base' style={{ minWidth: '150px' }}>TimeStamp</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {/* Pagination component */}
+              </thead>
+              <tbody>
+                {displayedData.map((item, index) => (
+                  <tr key={index}>
+                    <td className='rounded-lg dark:bg-white dark:text-black address'> <NavLink to={`/tx/${item.txid}`}>{item.txid}</NavLink></td>
+                    <td className='dark:bg-white dark:text-black'>{item.amount}</td>
+                    <td className=' rounded-lg dark:bg-white dark:text-black '>{convertTimestampToUTC(item.timestamp)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* Pagination component */}
 
-      </div>
-      <div className='pagination rounded-lg shadow-2xl'>
-        <ReactPaginate
-          previousLabel={'< '}
-          nextLabel={' >'}
-          containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
-          pageCount={pageCount}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          onPageChange={handlePageClick}
-          // containerClassName={'pagination'}
-          activeClassName={'active'}
-        />
-      </div>
-      <div className='bottomImg'>
-        <img className='homeedgeBR' src={themeMode === 'dark' ? homelightBR : homeedgeBR} />
-        <img className='homeedgeBL' src={themeMode === 'dark' ? homelightBL : homeedgeBL} />
+        </div>
+        <div className='pagination rounded-lg   shadow-2xl'>
+          <ReactPaginate
+            previousLabel={'< '}
+            nextLabel={' >'}
+            containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
+            pageCount={pageCount}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageClick}
+            // containerClassName={'pagination'}
+            activeClassName={'active'}
+          />
+        </div>
+        <div className='bottomImg'>
+          <img className='homeedgeBR' src={themeMode === 'dark' ? homelightBR : homeedgeBR} />
+          <img className='homeedgeBL' src={themeMode === 'dark' ? homelightBL : homeedgeBL} />
+        </div>
       </div>
     </>
   )

@@ -47,87 +47,89 @@ function WalletAddress() {
   function getAmountColor(sent) {
     return sent > 0 ? 'green' : 'red';
   }
-// +++++++++++++++++++++++++++++++++++
-useEffect(() => {
-  // Add a listener to handle screen size changes
-  const handleResize = () => {
+  // +++++++++++++++++++++++++++++++++++
+  useEffect(() => {
+    // Add a listener to handle screen size changes
+    const handleResize = () => {
       // Check if the screen size is small and set a flag accordingly
       const isSmallScreen = window.innerWidth <= 1024; // Adjust the width as needed
       setTableScrollable(isSmallScreen);
-  };
+    };
 
-  // Attach the listener
-  window.addEventListener('resize', handleResize);
+    // Attach the listener
+    window.addEventListener('resize', handleResize);
 
-  // Initial check on component mount
-  handleResize();
+    // Initial check on component mount
+    handleResize();
 
-  // Cleanup the listener on unmount
-  return () => {
+    // Cleanup the listener on unmount
+    return () => {
       window.removeEventListener('resize', handleResize);
-  };
-}, []);
+    };
+  }, []);
 
-const [isTableScrollable, setTableScrollable] = useState(false);
+  const [isTableScrollable, setTableScrollable] = useState(false);
   return (
     <>
-      <div className='qrCode-container'>
-        <div className='qrIImage'>
-          <img src={`https://explorer.blocx.space/qr/${address}`} alt="QR Code" />
-          <p className='dark:text-black'>QR Code</p>
+      <div className="mx-2 md:mx-0 lg:mx-0">
+        <div className='qrCode-container'>
+          <div className='qrIImage'>
+            <img src={`https://explorer.blocx.space/qr/${address}`} alt="QR Code" />
+            <p className='dark:text-black'>QR Code</p>
+          </div>
+          <div className='qrcodeContent dark:text-black'>
+            <h3 className='dark:text-black md-text-base'>Balance(BLOCX)</h3>
+            <h3 className='dark:text-black md-text-base'>{walletDataArray[0]?.balance}</h3>
+          </div>
         </div>
-        <div className='qrcodeContent dark:text-black'>
-          <h3 className='dark:text-black md-text-base'>Balance(BLOCX)</h3>
-          <h3 className='dark:text-black md-text-base'>{walletDataArray[0]?.balance}</h3>
-        </div>
-      </div>
-      <div className='tittle dark:text-black'>Last Transaction</div>
-      <div className={`column-3 rounded-lg shadow-2xl dark:bg-white dark:text-black ${isTableScrollable ? 'scrollable' : ''}`}>
-                <div className="table-container">
-                    <table className="custom-table">
-          <thead>
-            <tr>
-              <th className='dark:bg-white dark:text-black text-2xl flagAlign md-text-base' style={{ minWidth: '150px' }}>TX Hash</th>
-              <th className='dark:bg-white dark:text-black text-2xl'>Amount(Blocx)</th>
-              <th className='dark:bg-white dark:text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Balance(Blocx)</th>
-              <th className='dark:bg-white dark:text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Timestamp</th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayedData.map((item, index) => (
-              <tr key={index}>
-                <td className='dark:bg-white dark:text-black'>{item.txid}</td>
-                <td className='dark:bg-white dark:text-black'>
-                <p style={{ backgroundColor: getAmountColor(item.sent) === 'green' ? 'green' : 'red' }} className="rounded-full">
-  {item.sent > 0 ? `+${item.sent}` : `-${item.received}`}
-</p>
+        <div className='tittle dark:text-black'>Last Transaction</div>
+        <div className="text-white shadow-2xl bg-[#1d1d29]  mt-[2rem]  flex flex-col justify-between gap-10  border  border-[#2c293f] rounded-xl dark:bg-slate-100 dark:text-black overflow-x-auto">
+          <div className="table-container">
+            <table className="custom-table">
+              <thead>
+                <tr>
+                  <th className='dark:bg-white dark:text-black text-2xl flagAlign md-text-base' style={{ minWidth: '150px' }}>TX Hash</th>
+                  <th className='dark:bg-white dark:text-black text-2xl'>Amount(Blocx)</th>
+                  <th className='dark:bg-white dark:text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Balance(Blocx)</th>
+                  <th className='dark:bg-white dark:text-black text-2xl md-text-base' style={{ minWidth: '150px' }}>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                {displayedData.map((item, index) => (
+                  <tr key={index}>
+                    <td className='dark:bg-white dark:text-black'>{item.txid}</td>
+                    <td className='dark:bg-white dark:text-black'>
+                      <p style={{ backgroundColor: getAmountColor(item.sent) === 'green' ? 'green' : 'red' }} className="rounded-full">
+                        {item.sent > 0 ? `+${item.sent}` : `-${item.received}`}
+                      </p>
 
-                </td>
-                <td className='dark:bg-white dark:text-black'>{item.balance}</td>
-                <td className='dark:bg-white dark:text-black'>
-                  {convertTimestampToUTC(item.timestamp)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    </td>
+                    <td className='dark:bg-white dark:text-black'>{item.balance}</td>
+                    <td className='dark:bg-white dark:text-black'>
+                      {convertTimestampToUTC(item.timestamp)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-      <div className='pagination shadow-2xl'>
-        <ReactPaginate
-          previousLabel={'< '}
-          nextLabel={' >'}
-          containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
-          pageCount={pageCount}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={2}
-          onPageChange={handlePageClick}
-          activeClassName={'active'}
-        />
-      </div>
-      <div className='bottomImg'>
-        <img className='homeedgeBR' src={themeMode === 'dark' ? homelightBR : homeedgeBR} />
-        <img className='homeedgeBL' src={themeMode === 'dark' ? homelightBL : homeedgeBL} />
+        <div className='pagination shadow-2xl'>
+          <ReactPaginate
+            previousLabel={'< '}
+            nextLabel={' >'}
+            containerClassName={"pagination my-pagination dark:bg-white dark:text-black"}
+            pageCount={pageCount}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageClick}
+            activeClassName={'active'}
+          />
+        </div>
+        <div className='bottomImg'>
+          <img className='homeedgeBR' src={themeMode === 'dark' ? homelightBR : homeedgeBR} />
+          <img className='homeedgeBL' src={themeMode === 'dark' ? homelightBL : homeedgeBL} />
+        </div>
       </div>
     </>
   );

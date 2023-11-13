@@ -22,7 +22,7 @@ export function ApiProvider({ children }) {
  
   const fetchWalletData = async (address) => {
     try {
-      const walletApiUrl = `http://localhost:8080/https://explorer.blocx.space/ext/getaddresstxs/${address}/0/50`;
+      const walletApiUrl = `http://localhost:1000/https://explorer.blocx.space/ext/getaddresstxs/${address}/0/50`;
 
       const response = await fetch(walletApiUrl, {
         method: 'GET',
@@ -44,7 +44,7 @@ export function ApiProvider({ children }) {
     // +++++++++++++++++++++++++++ Fetch Transaction Data +++++++++++++++++++++
   const fetchTransactionData = async (address) => {
     try {
-      const walletApiUrl = `http://localhost:8080/https://explorer.blocx.space/ext/gettx/${address}`;
+      const walletApiUrl = `http://localhost:1000/https://explorer.blocx.space/ext/gettx/${address}`;
 
       const response = await fetch(walletApiUrl, {
         method: 'GET',
@@ -67,7 +67,7 @@ export function ApiProvider({ children }) {
   // +++++++++++++++++++++++++++++++ Fetch Orphan List ++++++++++++++++++++++++++
   const fetchOrphanList = async () => {
     try {
-      const orphanListApiUrl = `http://localhost:8080/https://explorer.blocx.space/ext/getorphanlist/0/10`;
+      const orphanListApiUrl = `http://localhost:1000/https://explorer.blocx.space/ext/getorphanlist/0/10`;
 
       const response = await fetch(orphanListApiUrl, {
         method: 'GET',
@@ -90,7 +90,7 @@ export function ApiProvider({ children }) {
   
   useEffect(() => {
     // +++++++++++++++++++++++++++++++Fetch Coin Supply+++++++++++++++++++++++++
-    const blockApiUrl = 'http://localhost:8080/https://explorer.blocx.space/ext/getmoneysupply'; // Use your own proxy URL for the block count
+    const blockApiUrl = 'http://localhost:1000/https://explorer.blocx.space/ext/getmoneysupply'; // Use your own proxy URL for the block count
     fetch(blockApiUrl, {
       method: 'GET',
       headers: {
@@ -116,7 +116,7 @@ export function ApiProvider({ children }) {
 
     // +++++++++++++++++++++++++++++Fetch masternode data++++++++++++++++++++
 
-    const masternodeApiUrl = 'http://localhost:8080/https://explorer.blocx.space/ext/getmasternodelist'; // Use your own proxy URL for masternode data
+    const masternodeApiUrl = 'http://localhost:1000/https://explorer.blocx.space/ext/getmasternodelist'; // Use your own proxy URL for masternode data
     fetch(masternodeApiUrl, {
       method: 'GET',
       headers: {
@@ -142,7 +142,7 @@ export function ApiProvider({ children }) {
 
   // +++++++++++++++++++++++++++Fetch block height+++++++++++++++++++
 
-  const blockheightApiUrl  = 'http://localhost:8080/https://explorer.blocx.space/api/getblockcount';
+  const blockheightApiUrl  = 'http://localhost:1000/https://explorer.blocx.space/api/getblockcount';
   fetch(blockheightApiUrl, {
     method: 'GET',
     headers: {
@@ -166,7 +166,7 @@ export function ApiProvider({ children }) {
 
     // +++++++++++++++++++++++++++Fetch master node count+++++++++++++++++++
 
-  const masternodeCountApiUrl  = 'http://localhost:8080/https://explorer.blocx.space/ext/getmasternodecount';
+  const masternodeCountApiUrl  = 'http://localhost:1000/https://explorer.blocx.space/ext/getmasternodecount';
   fetch(masternodeCountApiUrl, {
     method: 'GET',
     headers: {
@@ -190,7 +190,7 @@ export function ApiProvider({ children }) {
 
     // +++++++++++++++++++++++++++Fetch Market Cap+++++++++++++++++++
 
-  const marketCapApiUrl  = 'http://localhost:8080/https://explorer.blocx.space/ext/getmarketcap';
+  const marketCapApiUrl  = 'http://localhost:1000/https://explorer.blocx.space/ext/getmarketcap';
   fetch(marketCapApiUrl, {
     method: 'GET',
     headers: {
@@ -213,7 +213,7 @@ export function ApiProvider({ children }) {
     });
 
      //++++++++++++++++++++ Fetch holders count+++++++++++++++++++++++++
-     const holdersCountApiUrl = 'http://localhost:8080/https://explorer.blocx.space/ext/getholderscount'; // Use your own proxy URL for holders count
+     const holdersCountApiUrl = 'http://localhost:1000/https://explorer.blocx.space/ext/getholderscount'; // Use your own proxy URL for holders count
      fetch(holdersCountApiUrl, {
        method: 'GET',
        headers: {
@@ -235,7 +235,7 @@ export function ApiProvider({ children }) {
          setIsLoading(false);
        });
   //++++++++++++++++++++++++ Fetch last transactions data++++++++++++++++++++++++++++++++++ 
-       const lastTxsApiUrl = 'http://localhost:8080/https://explorer.blocx.space/ext/getlasttxs/100/0/100'; // Use your own proxy URL for last transactions data
+       const lastTxsApiUrl = 'http://localhost:1000/https://explorer.blocx.space/ext/getlasttxs/100/0/100'; // Use your own proxy URL for last transactions data
     fetch(lastTxsApiUrl, {
       method: 'GET',
       headers: {
@@ -258,7 +258,7 @@ export function ApiProvider({ children }) {
       });
 
        //++++++++++++++++++++++++ Fetch Network peer data++++++++++++++++++++++++++++++++++ 
-       const networkPeerApiUrl = 'http://localhost:8080/https://explorer.blocx.space/ext/getnetworkpeers'; // Use your own proxy URL for last transactions data
+       const networkPeerApiUrl = 'http://localhost:1000/https://explorer.blocx.space/ext/getnetworkpeers'; // Use your own proxy URL for last transactions data
     fetch(networkPeerApiUrl, {
       method: 'GET',
       headers: {
@@ -280,7 +280,7 @@ export function ApiProvider({ children }) {
         setIsLoading(false);
       });
 //++++++++++++++++++++++++ Fetch  Coin Holder data++++++++++++++++++++++++++++++++++ 
-const coinFolderApiUrl = 'http://localhost:8080/https://explorer.blocx.space/ext/holderslist'; // Use your own proxy URL for last transactions data
+const coinFolderApiUrl = 'http://localhost:1000/https://explorer.blocx.space/ext/holderslist'; // Use your own proxy URL for last transactions data
 fetch(coinFolderApiUrl, {
   method: 'GET',
   headers: {
